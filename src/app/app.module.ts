@@ -6,18 +6,11 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    // Remove HttpClientModule if using provideHttpClient
-  ],
-  providers: [
-    provideClientHydration(),
-    provideHttpClient(withFetch()), // Enable fetch API
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [provideClientHydration(), provideHttpClient(withFetch())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

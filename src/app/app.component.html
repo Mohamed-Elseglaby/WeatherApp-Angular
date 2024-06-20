@@ -1,10 +1,25 @@
+<div class="search">
+  <form #form="ngForm">
+    <input
+      type="text"
+      name=""
+      id=""
+      [placeholder]="this.location"
+      [(ngModel)]="location"
+      name="location"
+      (keyup.enter)="onSubmut()"
+    />
+  </form>
+</div>
 <div class="container">
   <div class="upper-content">
-    <img src="../assets/hot.jpg" alt="" *ngIf="15 > 14" />
-    <img src="../assets/cold.jpg" alt="" *ngIf="15 <= 14" />
+    <img src="../assets/hot.jpg" alt="" *ngIf="weatherData.current.is_day" />
+    <img src="../assets/cold.jpg" alt="" *ngIf="!weatherData.current.is_day" />
     <div class="weather-data">
-      <div class="location">Alexandria</div>
-      <div class="temperature">{{ 14.4 | number : "1.0-0" }}C</div>
+      <div class="location">{{ weatherData.location.name }}</div>
+      <div class="temperature">
+        {{ weatherData.current.temp_c | number : "1.0-0" }}C
+      </div>
     </div>
   </div>
   <div class="lower-content">
@@ -12,31 +27,45 @@
     <div class="more-info-container">
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/min.png" alt="" />
-          <span>min</span>
+          <div class="block">
+            <img [src]="weatherData.current.condition.icon" alt="" />
+            <span>Condition</span>
+          </div>
         </div>
-        <div class="info-block-value">10C</div>
+        <div class="info-block-value">
+          {{ weatherData.current.condition.text }}
+        </div>
       </div>
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/min.png" alt="" />
-          <span>min</span>
+          <div class="block">
+            <img src="../assets/hot.svg" alt="" />
+            <span>Feels</span>
+          </div>
         </div>
-        <div class="info-block-value">10C</div>
+        <div class="info-block-value">
+          {{ weatherData.current.feelslike_c }} C
+        </div>
       </div>
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/min.png" alt="" />
-          <span>humidty</span>
+          <div class="block">
+            <img src="../assets/humidty.svg" alt="" />
+            <span>humidty</span>
+          </div>
         </div>
-        <div class="info-block-value">10C</div>
+        <div class="info-block-value">{{ weatherData.current.humidity }}%</div>
       </div>
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/min.png" alt="" />
-          <span>Wind</span>
+          <div class="block">
+            <img src="../assets/wind.svg" alt="" />
+            <span>Wind</span>
+          </div>
         </div>
-        <div class="info-block-value">11 Km/h</div>
+        <div class="info-block-value">
+          {{ weatherData.current.wind_kph }} Km/h
+        </div>
       </div>
     </div>
   </div>

@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { WeatherService } from './Services/weather.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'WeatherApp';
   weatherData: any;
-  city: string = 'London';
+  location: string = 'Alexandria';
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(public weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.getWeather(this.city);
+    this.getCurrentWeather(this.location);
   }
-
-  getWeather(city: string): void {
-    this.weatherService.getWeather(city).subscribe(
+  onSubmut() {
+    this.getCurrentWeather(this.location);
+    console.log(this.location);
+    this.location = '';
+  }
+  getCurrentWeather(location: string): void {
+    this.weatherService.getCurrentWeather(location).subscribe(
       (data) => {
         this.weatherData = data;
         console.log(this.weatherData);
